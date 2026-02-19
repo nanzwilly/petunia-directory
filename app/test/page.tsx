@@ -141,22 +141,20 @@ export default function TestPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-teal-800 text-white px-6 py-4 shadow-md">
-        <h1 className="text-2xl font-bold tracking-tight">Petunia Directory</h1>
-        <p className="text-teal-200 text-sm mt-0.5">Community services &amp; contacts</p>
-      </header>
-
-      {/* Search bar */}
-      <div className="bg-teal-700 px-6 py-3">
+      {/* Header with search */}
+      <header className="bg-teal-800 text-white px-6 py-3 shadow-md flex items-center justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold tracking-tight leading-tight">Petunia Directory</h1>
+          <p className="text-teal-200 text-xs">Community services &amp; contacts</p>
+        </div>
         <input
           type="search"
           placeholder="Search categories, names or numbers…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-lg text-sm px-4 py-2 rounded-lg bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+          className="w-full max-w-sm text-sm px-4 py-2 rounded-lg bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
         />
-      </div>
+      </header>
 
       {/* Cards grid */}
       <main className="flex-1 p-6">
