@@ -29,7 +29,16 @@
   {
     "category": "Call Driver / Spare Driver",
     "entries": [
+      { "name": "Rajan Driver", "phone": "99458 81979" },
+      { "name": "Mishra Cab Driver", "phone": "90358 01122" },
       { "name": "DriveU", "note": "App-based" }
+    ]
+  },
+  {
+    "category": "Car Cleaning",
+    "entries": [
+      { "name": "Nagaraj", "phone": "99459 08692" },
+      { "name": "Napappa", "phone": "96861 25219" }
     ]
   },
   {
@@ -43,8 +52,7 @@
     "category": "Courier",
     "entries": [
       { "name": "DTDC Vikram", "phone": "74112 56619" },
-      { "name": "Porter", "note": "App-based" },
-      { "name": "Swiggy Genie", "note": "App-based" },
+      { "name": "Porter", "note": "https://porter.in/" },
       { "name": "Telyport", "note": "App-based" },
       { "name": "Uber Courier", "note": "App-based" },
       { "name": "Rapido Parcel", "note": "App-based" },
@@ -55,6 +63,13 @@
     "category": "Curtains and Blinds",
     "entries": [
       { "name": "Floating Walls", "note": "" }
+    ]
+  },
+  {
+    "category": "ACT Internet",
+    "entries": [
+      { "name": "Chandu Reddy", "phone": "89517 87558" },
+      { "name": "Suhail", "phone": "88844 37747" }
     ]
   },
   {
@@ -89,6 +104,13 @@
     "category": "Guitar Teacher",
     "entries": [
       { "name": "Satish Guitar Teacher", "phone": "99162 30777" }
+    ]
+  },
+  {
+    "category": "Home Deliveries",
+    "entries": [
+      { "name": "Meat & Chicken – Pick A Pack Dani", "phone": "81233 60022" },
+      { "name": "Tender Coconut", "phone": "77608 97291" }
     ]
   },
   {
@@ -194,6 +216,12 @@
     ]
   },
   {
+    "category": "Stove Cleaning / Service",
+    "entries": [
+      { "name": "Puttaraju", "phone": "99809 80144" }
+    ]
+  },
+  {
     "category": "Stationery",
     "entries": [
       { "name": "Contact", "phone": "77953 05807" }
@@ -213,6 +241,12 @@
       { "name": "Uber", "note": "App-based" },
       { "name": "Ola", "note": "App-based" },
       { "name": "BLR Pulse", "note": "App-based" }
+    ]
+  },
+  {
+    "category": "Wine / Liquor Delivery",
+    "entries": [
+      { "name": "Manju MRP Liquor", "phone": "70260 78005" }
     ]
   },
   {
