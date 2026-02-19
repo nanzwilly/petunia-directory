@@ -111,12 +111,6 @@
     ]
   },
   {
-    "category": "Football Coaching",
-    "entries": [
-      { "name": "Naveen Coach", "phone": "+91 97423 58519" }
-    ]
-  },
-  {
     "category": "Guitar Teacher",
     "entries": [
       { "name": "Satish Guitar Teacher", "phone": "99162 30777" }
@@ -239,7 +233,8 @@
     "category": "Sports",
     "entries": [
       { "name": "Saalsa Badminton Centre – Chandramouli", "phone": "98458 90589" },
-      { "name": "Tennis – Sunil", "phone": "98806 67823" }
+      { "name": "Tennis – Sunil", "phone": "98806 67823" },
+      { "name": "Football – Naveen Coach", "phone": "+91 97423 58519" }
     ]
   },
   {
