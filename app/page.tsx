@@ -69,7 +69,7 @@ function categoryIcon(category: string): string {
     "RTO Agent": "📋",
     "Sports": "🏸",
     "Stationery": "✏️",
-    "Stove Cleaning / Service": "🔥",
+    "Service Technicians": "🔧",
     "Wine / Liquor Delivery": "🍷",
     "Taxi": "🚕",
     "Tailor": "🧵",

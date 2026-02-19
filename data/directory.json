@@ -225,9 +225,11 @@
     ]
   },
   {
-    "category": "Stove Cleaning / Service",
+    "category": "Service Technicians",
     "entries": [
-      { "name": "Puttaraju", "phone": "99809 80144" }
+      { "name": "Stove Cleaning – Puttaraju", "phone": "99809 80144" },
+      { "name": "Bosch Service", "phone": "84510 00555" },
+      { "name": "Bosch Service – Ramesh", "phone": "96115 52928" }
     ]
   },
   {
