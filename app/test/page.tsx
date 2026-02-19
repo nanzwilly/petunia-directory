@@ -43,6 +43,7 @@ function categoryIcon(category: string): string {
     "Bicycle Repair": "🚲",
     "Cab Service / Airport Taxi": "🚖",
     "Call Driver / Spare Driver": "🧑‍✈️",
+    "CAs": "🧾",
     "Car Cleaning": "🚿",
     "Carpenter": "🪚",
     "Courier": "📦",

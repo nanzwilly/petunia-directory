@@ -52,6 +52,13 @@
     ]
   },
   {
+    "category": "CAs",
+    "entries": [
+      { "name": "Sathish J", "phone": "88922 06171" },
+      { "name": "Piyush", "phone": "81053 24165" }
+    ]
+  },
+  {
     "category": "Car Cleaning",
     "entries": [
       { "name": "Nagaraj", "phone": "99459 08692" },
