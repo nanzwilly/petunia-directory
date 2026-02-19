@@ -27,10 +27,15 @@
     ]
   },
   {
+    "category": "Cab Service / Airport Taxi",
+    "entries": [
+      { "name": "Mishra Cab Driver", "phone": "90358 01122" }
+    ]
+  },
+  {
     "category": "Call Driver / Spare Driver",
     "entries": [
       { "name": "Rajan Driver", "phone": "99458 81979" },
-      { "name": "Mishra Cab Driver", "phone": "90358 01122" },
       { "name": "DriveU", "note": "App-based" }
     ]
   },
@@ -77,6 +82,12 @@
     "entries": [
       { "name": "Dr Ilyas (Emergency)", "phone": "+91 99007 02362" },
       { "name": "Dr Mali Mithun", "phone": "+91 99009 46422" }
+    ]
+  },
+  {
+    "category": "Ekhata",
+    "entries": [
+      { "name": "Sagar", "phone": "91136 52660" }
     ]
   },
   {
