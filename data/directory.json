@@ -1,0 +1,224 @@
+[
+  {
+    "category": "Aadhaar Enrolment",
+    "entries": [
+      { "name": "BDA Complex HBR Layout", "note": "" },
+      { "name": "HDFC, Kalyan Nagar, RT Nagar", "note": "" }
+    ]
+  },
+  {
+    "category": "AC Technician",
+    "entries": [
+      { "name": "Technician Nagavara", "phone": "89046 32209" },
+      { "name": "Dinesh Electrician", "phone": "76650 97848" }
+    ]
+  },
+  {
+    "category": "Art Galleries",
+    "entries": [
+      { "name": "Gallery G", "note": "" }
+    ]
+  },
+  {
+    "category": "Bicycle Repair",
+    "entries": [
+      { "name": "Antony Raj", "phone": "96325 01923" },
+      { "name": "Nayaz", "phone": "99025 53487" }
+    ]
+  },
+  {
+    "category": "Carpenter",
+    "entries": [
+      { "name": "Saravana", "phone": "78297 95940" },
+      { "name": "Imran", "phone": "89043 23525" }
+    ]
+  },
+  {
+    "category": "Courier",
+    "entries": [
+      { "name": "DTDC Vikram", "phone": "74112 56619" },
+      { "name": "Porter", "note": "App-based" },
+      { "name": "Swiggy Genie", "note": "App-based" },
+      { "name": "Telyport", "note": "App-based" },
+      { "name": "Uber Courier", "note": "App-based" },
+      { "name": "Rapido Parcel", "note": "App-based" },
+      { "name": "Uncle Delivery", "note": "Big items" }
+    ]
+  },
+  {
+    "category": "Curtains and Blinds",
+    "entries": [
+      { "name": "Floating Walls", "note": "" }
+    ]
+  },
+  {
+    "category": "Doctors",
+    "entries": [
+      { "name": "Dr Ilyas (Emergency)", "phone": "+91 99007 02362" },
+      { "name": "Dr Mali Mithun", "phone": "+91 99009 46422" }
+    ]
+  },
+  {
+    "category": "Driving School",
+    "entries": [
+      { "name": "Sri Banjara", "phone": "99004 30889" },
+      { "name": "Focus Banjara", "phone": "95353 33123" }
+    ]
+  },
+  {
+    "category": "Eye Specialists",
+    "entries": [
+      { "name": "Narayana Netralaya, Nagavara", "note": "" },
+      { "name": "Dr Rekha Gyanchand – Orchard Eye Clinic", "phone": "99166 94358" },
+      { "name": "Dr Balakrishna Shetty – Devi Eye Hospital, Koramangala", "note": "" }
+    ]
+  },
+  {
+    "category": "Football Coaching",
+    "entries": [
+      { "name": "Naveen Coach", "phone": "+91 97423 58519" }
+    ]
+  },
+  {
+    "category": "Guitar Teacher",
+    "entries": [
+      { "name": "Satish Guitar Teacher", "phone": "99162 30777" }
+    ]
+  },
+  {
+    "category": "Labs",
+    "entries": [
+      { "name": "Anand Diagnostic Lab", "note": "" }
+    ]
+  },
+  {
+    "category": "Laptop Repair",
+    "entries": [
+      { "name": "Manoj", "phone": "98455 32673" }
+    ]
+  },
+  {
+    "category": "Meal Service",
+    "entries": [
+      { "name": "Kavitha – Vardha Kitchen", "phone": "82777 46310", "phone2": "82964 51907" },
+      { "name": "Sangeetha Dinesh", "phone": "81056 68788" }
+    ]
+  },
+  {
+    "category": "Nephrologist",
+    "entries": [
+      { "name": "Dr Acharya – MS Ramiah", "note": "" },
+      { "name": "Dr Girish – Sparsh Hospital", "note": "" },
+      { "name": "Dr Walter – Bangalore Baptist Hospital", "note": "" }
+    ]
+  },
+  {
+    "category": "Notary",
+    "entries": [
+      { "name": "Mir Zia Ulla – HBR BDA", "phone": "+91 98440 68746" }
+    ]
+  },
+  {
+    "category": "Nurse",
+    "entries": [
+      { "name": "Divya", "phone": "96062 08152" },
+      { "name": "Kalpana", "phone": "97405 22243" },
+      { "name": "Care on Call", "phone": "99169 15165" },
+      { "name": "Usha Sister", "phone": "72597 45047" }
+    ]
+  },
+  {
+    "category": "Pedicure",
+    "entries": [
+      { "name": "Dr Aamir – Podologist", "phone": "97397 13779" }
+    ]
+  },
+  {
+    "category": "Pharmacies",
+    "entries": [
+      { "name": "SNN Pharma", "phone": "+91 99007 27050" },
+      { "name": "Hani Medicals", "note": "Also does photocopy" }
+    ]
+  },
+  {
+    "category": "Pigeon Net",
+    "entries": [
+      { "name": "Mahesh Pigeon Net", "phone": "+91 89787 70756" }
+    ]
+  },
+  {
+    "category": "Plumber",
+    "entries": [
+      { "name": "Akshay", "phone": "86600 86684" },
+      { "name": "Vicky Sharma", "phone": "97317 68481" },
+      { "name": "Parvez Ahmed", "phone": "95384 53564" }
+    ]
+  },
+  {
+    "category": "Police",
+    "entries": [
+      { "name": "Emergency", "phone": "112" },
+      { "name": "Hoysala Govindpura", "phone": "91831 73207" }
+    ]
+  },
+  {
+    "category": "Photocopy",
+    "entries": [
+      { "name": "Hani Medicals", "note": "" }
+    ]
+  },
+  {
+    "category": "Pulmonologist",
+    "entries": [
+      { "name": "Dr Hirenappa – Manipal Hebbal", "note": "" },
+      { "name": "Dr Ajay Handa – Baptist Hospital", "note": "" }
+    ]
+  },
+  {
+    "category": "Puncture Repair",
+    "entries": [
+      { "name": "Abdul – Near Manyata IBM", "phone": "99009 23795", "phone2": "85536 88290" },
+      { "name": "Name Unknown", "phone": "99009 23795" }
+    ]
+  },
+  {
+    "category": "RTO Agent",
+    "entries": [
+      { "name": "Syed", "phone": "98800 02204" }
+    ]
+  },
+  {
+    "category": "Stationery",
+    "entries": [
+      { "name": "Contact", "phone": "77953 05807" }
+    ]
+  },
+  {
+    "category": "Swimming Coach",
+    "entries": [
+      { "name": "Nirala Bopanna", "phone": "98804 44033" }
+    ]
+  },
+  {
+    "category": "Taxi",
+    "entries": [
+      { "name": "Namma Yatri", "note": "App-based" },
+      { "name": "Rapido", "note": "App-based" },
+      { "name": "Uber", "note": "App-based" },
+      { "name": "Ola", "note": "App-based" },
+      { "name": "BLR Pulse", "note": "App-based" }
+    ]
+  },
+  {
+    "category": "Travel Agency",
+    "entries": [
+      { "name": "Vishalakshi Air Journey", "phone": "+91 99807 56963" }
+    ]
+  },
+  {
+    "category": "TV Repair",
+    "entries": [
+      { "name": "Amarnath Reddy – Sony TV Repair", "phone": "94480 52602" }
+    ]
+  }
+]
