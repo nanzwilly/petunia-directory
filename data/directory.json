@@ -126,7 +126,9 @@
     "category": "Home Deliveries",
     "entries": [
       { "name": "Meat & Chicken – Pick A Pack Dani", "phone": "81233 60022" },
-      { "name": "Tender Coconut", "phone": "77608 97291" }
+      { "name": "Tender Coconut", "phone": "77608 97291" },
+      { "name": "Vegetable Vendor – Ashok", "phone": "96068 45102" },
+      { "name": "Shopwel Mart", "phone": "99000 03706" }
     ]
   },
   {
@@ -231,6 +233,13 @@
     "category": "Stove Cleaning / Service",
     "entries": [
       { "name": "Puttaraju", "phone": "99809 80144" }
+    ]
+  },
+  {
+    "category": "Sports",
+    "entries": [
+      { "name": "Saalsa Badminton Centre – Chandramouli", "phone": "98458 90589" },
+      { "name": "Tennis – Sunil", "phone": "98806 67823" }
     ]
   },
   {

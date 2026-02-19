@@ -68,6 +68,7 @@ function categoryIcon(category: string): string {
     "Pulmonologist": "🫁",
     "Puncture Repair": "🛞",
     "RTO Agent": "📋",
+    "Sports": "🏸",
     "Stationery": "✏️",
     "Stove Cleaning / Service": "🔥",
     "Wine / Liquor Delivery": "🍷",
