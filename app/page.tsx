@@ -58,6 +58,7 @@ function categoryIcon(category: string): string {
     "Laptop Repair": "💻",
     "Meal Service": "🍱",
     "Nephrologist": "🏥",
+    "Newspaper Delivery": "📰",
     "Notary": "📜",
     "Nurse": "💉",
     "Pedicure": "🦶",
