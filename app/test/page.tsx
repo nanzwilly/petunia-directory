@@ -39,6 +39,7 @@ function categoryIcon(category: string): string {
     "AC Technician": "❄️",
     "Internet": "🌐",
     "Art Galleries": "🎨",
+    "Bird / Animal Rescue": "🐦",
     "Bicycle Repair": "🚲",
     "Cab Service / Airport Taxi": "🚖",
     "Call Driver / Spare Driver": "🧑‍✈️",
