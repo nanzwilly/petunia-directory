@@ -59,6 +59,7 @@ function categoryIcon(category: string): string {
     "Meal Service": "🍱",
     "Nephrologist": "🏥",
     "Newspaper Delivery": "📰",
+    "Ortho Doctors": "🦴",
     "Notary": "📜",
     "Nurse": "💉",
     "Pedicure": "🦶",
