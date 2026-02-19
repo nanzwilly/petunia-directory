@@ -25,7 +25,7 @@ function PhoneLink({ phone }: { phone: string }) {
   return (
     <a
       href={`tel:${formatPhone(phone)}`}
-      className="inline-flex items-center gap-1 text-purple-700 font-medium hover:underline text-sm"
+      className="inline-flex items-center gap-1 text-teal-700 font-medium hover:underline text-sm"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
         <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1 11.47 11.47 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z" />
@@ -46,21 +46,21 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-purple-900 text-white px-6 py-4 shadow-md flex-shrink-0">
+      <header className="bg-teal-800 text-white px-6 py-4 shadow-md flex-shrink-0">
         <h1 className="text-2xl font-bold tracking-tight">Petunia Directory</h1>
-        <p className="text-purple-300 text-sm mt-0.5">Community services &amp; contacts</p>
+        <p className="text-teal-200 text-sm mt-0.5">Community services &amp; contacts</p>
       </header>
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-56 bg-gray-800 flex flex-col flex-shrink-0">
+        <aside className="w-44 bg-gray-800 flex flex-col flex-shrink-0">
           <div className="p-3 border-b border-gray-700">
             <input
               type="search"
               placeholder="Search categories…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full text-sm px-3 py-1.5 rounded-md bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full text-sm px-3 py-1.5 rounded-md bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
           <nav className="overflow-y-auto flex-1">
@@ -71,9 +71,9 @@ export default function Home() {
                   setSelected(cat as Category);
                   setSearch("");
                 }}
-                className={`w-full text-left px-4 py-2.5 text-sm border-b border-gray-700 transition-colors ${
+                className={`w-full text-left px-3 py-1.5 text-xs border-b border-gray-700 transition-colors ${
                   selected.category === cat.category
-                    ? "bg-purple-700 text-white font-semibold"
+                    ? "bg-teal-700 text-white font-semibold"
                     : "text-gray-300 hover:bg-gray-700"
                 }`}
               >
@@ -89,7 +89,7 @@ export default function Home() {
         {/* Main content */}
         <main className="flex-1 overflow-y-auto p-6">
           <h2 className="text-xl font-bold text-gray-800 mb-4">{selected.category}</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {(selected.entries as Entry[]).map((entry, i) => (
               <div
                 key={i}
