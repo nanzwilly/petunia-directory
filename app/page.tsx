@@ -71,7 +71,6 @@ function categoryIcon(category: string): string {
     "Stationery": "✏️",
     "Stove Cleaning / Service": "🔥",
     "Wine / Liquor Delivery": "🍷",
-    "Swimming Coach": "🏊",
     "Taxi": "🚕",
     "Tailor": "🧵",
     "Travel Agency": "✈️",

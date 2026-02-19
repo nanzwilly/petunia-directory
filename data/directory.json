@@ -234,19 +234,14 @@
     "entries": [
       { "name": "Saalsa Badminton Centre – Chandramouli", "phone": "98458 90589" },
       { "name": "Tennis – Sunil", "phone": "98806 67823" },
-      { "name": "Football – Naveen Coach", "phone": "+91 97423 58519" }
+      { "name": "Football – Naveen Coach", "phone": "+91 97423 58519" },
+      { "name": "Swimming – Nirala Bopanna", "phone": "98804 44033" }
     ]
   },
   {
     "category": "Stationery",
     "entries": [
       { "name": "Contact", "phone": "77953 05807" }
-    ]
-  },
-  {
-    "category": "Swimming Coach",
-    "entries": [
-      { "name": "Nirala Bopanna", "phone": "98804 44033" }
     ]
   },
   {
