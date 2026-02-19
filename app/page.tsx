@@ -73,6 +73,7 @@ function categoryIcon(category: string): string {
     "Wine / Liquor Delivery": "🍷",
     "Swimming Coach": "🏊",
     "Taxi": "🚕",
+    "Tailor": "🧵",
     "Travel Agency": "✈️",
     "TV Repair": "📺",
   };
