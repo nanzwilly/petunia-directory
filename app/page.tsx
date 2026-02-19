@@ -29,7 +29,7 @@ const PRIORITY = [
   "Carpenter",
   "Electrician",
   "Courier",
-  "Taxi",
+  "Cab Service / Airport Taxi",
   "Meal Service",
 ];
 

@@ -29,7 +29,12 @@
   {
     "category": "Cab Service / Airport Taxi",
     "entries": [
-      { "name": "Mishra Cab Driver", "phone": "90358 01122" }
+      { "name": "Mishra Cab Driver", "phone": "90358 01122" },
+      { "name": "Namma Yatri", "note": "App-based" },
+      { "name": "Rapido", "note": "App-based" },
+      { "name": "Uber", "note": "App-based" },
+      { "name": "Ola", "note": "App-based" },
+      { "name": "BLR Pulse", "note": "App-based" }
     ]
   },
   {
@@ -243,16 +248,6 @@
     "category": "Swimming Coach",
     "entries": [
       { "name": "Nirala Bopanna", "phone": "98804 44033" }
-    ]
-  },
-  {
-    "category": "Taxi",
-    "entries": [
-      { "name": "Namma Yatri", "note": "App-based" },
-      { "name": "Rapido", "note": "App-based" },
-      { "name": "Uber", "note": "App-based" },
-      { "name": "Ola", "note": "App-based" },
-      { "name": "BLR Pulse", "note": "App-based" }
     ]
   },
   {
