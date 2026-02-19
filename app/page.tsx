@@ -82,7 +82,7 @@ function PhoneLink({ phone }: { phone: string }) {
   return (
     <a
       href={`tel:${formatPhone(phone)}`}
-      className="inline-flex items-center gap-1 text-teal-600 font-medium hover:underline text-xs"
+      className="inline-flex items-center gap-1 text-teal-600 font-medium hover:underline text-sm sm:text-xs"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
         <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1 11.47 11.47 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z" />
@@ -98,16 +98,16 @@ function CategoryCard({ category, entries }: { category: string; entries: Entry[
       {/* Card header */}
       <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 flex-shrink-0">
         <span className="text-xl">{categoryIcon(category)}</span>
-        <h2 className="text-white font-semibold text-sm">{category}</h2>
+        <h2 className="text-white font-semibold text-base sm:text-sm">{category}</h2>
       </div>
       {/* Entries — scrollable */}
       <div className="divide-y divide-gray-100 overflow-y-auto flex-1">
         {entries.map((entry, i) => (
           <div key={i} className="px-4 py-2.5 flex flex-col gap-0.5">
-            <p className="text-gray-800 text-sm font-medium leading-snug">{entry.name}</p>
+            <p className="text-gray-800 text-base sm:text-sm font-medium leading-snug">{entry.name}</p>
             {entry.phone && <PhoneLink phone={entry.phone} />}
             {entry.phone2 && <PhoneLink phone={entry.phone2} />}
-            {entry.note && <p className="text-xs text-gray-400 italic">{entry.note}</p>}
+            {entry.note && <p className="text-sm sm:text-xs text-gray-400 italic">{entry.note}</p>}
           </div>
         ))}
       </div>
