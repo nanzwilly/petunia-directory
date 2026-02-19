@@ -50,6 +50,7 @@ function categoryIcon(category: string): string {
     "Driving School": "🚗",
     "Ekhata": "📝",
     "Eye Specialists": "👁️",
+    "Frames": "🖼️",
     "Guitar Teacher": "🎸",
     "Home Deliveries": "🛵",
     "Labs": "🔬",
