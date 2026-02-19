@@ -93,14 +93,14 @@ function PhoneLink({ phone }: { phone: string }) {
 
 function CategoryCard({ category, entries }: { category: string; entries: Entry[] }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col" style={{ height: "180px" }}>
       {/* Card header */}
-      <div className="bg-gray-800 px-4 py-3 flex items-center gap-2">
+      <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 flex-shrink-0">
         <span className="text-xl">{categoryIcon(category)}</span>
         <h2 className="text-white font-semibold text-sm">{category}</h2>
       </div>
-      {/* Entries */}
-      <div className="divide-y divide-gray-100">
+      {/* Entries — scrollable */}
+      <div className="divide-y divide-gray-100 overflow-y-auto flex-1">
         {entries.map((entry, i) => (
           <div key={i} className="px-4 py-2.5 flex flex-col gap-0.5">
             <p className="text-gray-800 text-sm font-medium leading-snug">{entry.name}</p>
