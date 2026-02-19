@@ -25,7 +25,7 @@ function PhoneLink({ phone }: { phone: string }) {
   return (
     <a
       href={`tel:${formatPhone(phone)}`}
-      className="inline-flex items-center gap-1 text-green-700 font-medium hover:underline text-sm"
+      className="inline-flex items-center gap-1 text-purple-700 font-medium hover:underline text-sm"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
         <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1 11.47 11.47 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z" />
@@ -44,23 +44,23 @@ export default function Home() {
   );
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-green-800 text-white px-6 py-4 shadow-md flex-shrink-0">
+      <header className="bg-purple-900 text-white px-6 py-4 shadow-md flex-shrink-0">
         <h1 className="text-2xl font-bold tracking-tight">Petunia Directory</h1>
-        <p className="text-green-200 text-sm mt-0.5">Community services &amp; contacts</p>
+        <p className="text-purple-300 text-sm mt-0.5">Community services &amp; contacts</p>
       </header>
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-56 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-          <div className="p-3 border-b border-gray-100">
+        <aside className="w-56 bg-gray-800 flex flex-col flex-shrink-0">
+          <div className="p-3 border-b border-gray-700">
             <input
               type="search"
               placeholder="Search categories…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full text-sm px-3 py-1.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full text-sm px-3 py-1.5 rounded-md bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
           <nav className="overflow-y-auto flex-1">
@@ -71,17 +71,17 @@ export default function Home() {
                   setSelected(cat as Category);
                   setSearch("");
                 }}
-                className={`w-full text-left px-4 py-2.5 text-sm border-b border-gray-50 transition-colors ${
+                className={`w-full text-left px-4 py-2.5 text-sm border-b border-gray-700 transition-colors ${
                   selected.category === cat.category
-                    ? "bg-green-700 text-white font-semibold"
-                    : "text-gray-700 hover:bg-green-50"
+                    ? "bg-purple-700 text-white font-semibold"
+                    : "text-gray-300 hover:bg-gray-700"
                 }`}
               >
                 {cat.category}
               </button>
             ))}
             {filtered.length === 0 && (
-              <p className="text-gray-400 text-sm px-4 py-6 text-center">No categories found</p>
+              <p className="text-gray-500 text-sm px-4 py-6 text-center">No categories found</p>
             )}
           </nav>
         </aside>
@@ -108,7 +108,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 text-center text-xs text-gray-400 py-2 flex-shrink-0">
+      <footer className="bg-gray-800 border-t border-gray-700 text-center text-xs text-gray-400 py-2 flex-shrink-0">
         Petunia Directory — managed by the community
       </footer>
     </div>
