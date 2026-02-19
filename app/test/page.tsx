@@ -37,7 +37,7 @@ function categoryIcon(category: string): string {
   const icons: Record<string, string> = {
     "Aadhaar Enrolment": "🪪",
     "AC Technician": "❄️",
-    "ACT Internet": "🌐",
+    "Internet": "🌐",
     "Art Galleries": "🎨",
     "Bicycle Repair": "🚲",
     "Cab Service / Airport Taxi": "🚖",
