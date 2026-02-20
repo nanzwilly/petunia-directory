@@ -22,7 +22,8 @@
       { "name": "Fire", "phone": "101" },
       { "name": "Senior Citizen's Helpline", "phone": "1098" },
       { "name": "Women Helpline", "phone": "1091" },
-      { "name": "Children Helpline", "phone": "1098" }
+      { "name": "Children Helpline", "phone": "1098" },
+      { "name": "Cyber Fraud", "phone": "1930" }
     ]
   },
   {
