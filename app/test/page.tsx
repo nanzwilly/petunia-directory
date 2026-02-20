@@ -21,7 +21,6 @@ const PRIORITY = [
   "Helplines",
   "Pharmacies",
   "Doctors",
-  "Police",
   "Nurse",
   "Labs",
   "Bicycle Repair",
