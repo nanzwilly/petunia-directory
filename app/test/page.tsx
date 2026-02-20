@@ -17,6 +17,8 @@ type Category = {
 
 // Priority categories appear first
 const PRIORITY = [
+  "Ambulance Services",
+  "Helplines",
   "Pharmacies",
   "Doctors",
   "Police",
@@ -35,6 +37,8 @@ const PRIORITY = [
 
 function categoryIcon(category: string): string {
   const icons: Record<string, string> = {
+    "Ambulance Services": "🚑",
+    "Helplines": "📞",
     "Aadhaar Enrolment": "🪪",
     "AC Technician": "❄️",
     "Internet": "🌐",

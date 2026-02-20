@@ -1,5 +1,30 @@
 [
   {
+    "category": "Ambulance Services",
+    "entries": [
+      { "name": "General Emergency", "phone": "102" },
+      { "name": "Free Ambulance", "phone": "108" },
+      { "name": "Emergency", "phone": "112" },
+      { "name": "Aster CMI", "phone": "080 43420100" },
+      { "name": "Aster Emergency", "phone": "080 46474647" },
+      { "name": "Manipal Hebbal", "phone": "080 22221111" },
+      { "name": "Baptist Hospital", "phone": "080 22024700" },
+      { "name": "Altius Hospital – HBR Layout", "phone": "88827 99799" },
+      { "name": "Trilife Hospital – Kalyan Nagar", "phone": "18004202222" }
+    ]
+  },
+  {
+    "category": "Helplines",
+    "entries": [
+      { "name": "Police", "phone": "100" },
+      { "name": "Hoysala", "phone": "103" },
+      { "name": "Fire", "phone": "101" },
+      { "name": "Senior Citizen's Helpline", "phone": "1098" },
+      { "name": "Women Helpline", "phone": "1091" },
+      { "name": "Children Helpline", "phone": "1098" }
+    ]
+  },
+  {
     "category": "Aadhaar Enrolment",
     "entries": [
       { "name": "BDA Complex HBR Layout", "note": "" },
