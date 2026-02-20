@@ -167,10 +167,11 @@
   {
     "category": "Home Deliveries",
     "entries": [
+      { "name": "SGM Store – Vijay", "phone": "97310 03696" },
+      { "name": "Shopwel Mart", "phone": "99000 03706" },
       { "name": "Meat & Chicken – Pick A Pack Dani", "phone": "81233 60022" },
       { "name": "Tender Coconut", "phone": "77608 97291" },
-      { "name": "Vegetable Vendor – Ashok", "phone": "96068 45102" },
-      { "name": "Shopwel Mart", "phone": "99000 03706" }
+      { "name": "Vegetable Vendor – Ashok", "phone": "96068 45102" }
     ]
   },
   {
