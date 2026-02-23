@@ -16,8 +16,17 @@ export async function GET(request: NextRequest) {
     if (!key) return NextResponse.json({ error: "Missing key" }, { status: 400 });
 
     const redis = getRedis();
-    const raw = await redis.lrange<Comment>(`comments:${key}`, 0, 49);
-    return NextResponse.json(raw);
+    const raw = await redis.lrange(`comments:${key}`, 0, 49);
+    // Upstash may return items as strings or objects — normalise both
+    const comments: Comment[] = raw
+      .map((item) => {
+        if (typeof item === "string") {
+          try { return JSON.parse(item) as Comment; } catch { return null; }
+        }
+        return item as Comment;
+      })
+      .filter((c): c is Comment => !!c && typeof c.text === "string");
+    return NextResponse.json(comments);
   } catch {
     return NextResponse.json([]);
   }
