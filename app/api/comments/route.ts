@@ -1,7 +1,7 @@
 import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from "next/server";
 
-type Comment = { text: string; timestamp: number };
+type Comment = { text: string; timestamp: number; author?: string };
 
 function getRedis() {
   return new Redis({
@@ -34,12 +34,16 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { key, text } = (await request.json()) as { key: string; text: string };
+    const { key, text, author } = (await request.json()) as { key: string; text: string; author?: string };
     if (!key || !text?.trim()) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
-    const comment: Comment = { text: text.trim().slice(0, 500), timestamp: Date.now() };
+    const comment: Comment = {
+      text: text.trim().slice(0, 500),
+      timestamp: Date.now(),
+      author: author?.trim().slice(0, 50) || "Anonymous",
+    };
     const redis = getRedis();
     await Promise.all([
       redis.lpush(`comments:${key}`, comment),

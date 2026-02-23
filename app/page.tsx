@@ -16,7 +16,7 @@ type Category = {
 };
 
 type Reaction = { up: number; down: number; comments: number };
-type Comment = { text: string; timestamp: number };
+type Comment = { text: string; timestamp: number; author?: string };
 
 // Priority categories appear first
 const PRIORITY = [
@@ -154,21 +154,21 @@ function CategoryCard({
                   className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-green-600 transition-colors"
                   title="Helpful"
                 >
-                  👍 <span>{r?.up ?? 0}</span>
+                  👍 <span>{r?.up || 0}</span>
                 </button>
                 <button
                   onClick={() => onReact(key, "down")}
                   className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-red-500 transition-colors"
                   title="Not helpful"
                 >
-                  👎 <span>{r?.down ?? 0}</span>
+                  👎 <span>{r?.down || 0}</span>
                 </button>
                 <button
                   onClick={() => onOpenComments(key, entry.name)}
                   className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-teal-600 transition-colors"
                   title="Comments"
                 >
-                  💬 <span>{r?.comments ?? 0}</span>
+                  💬 <span>{r?.comments || 0}</span>
                 </button>
               </div>
             </div>
@@ -185,6 +185,7 @@ export default function Home() {
   const [commentPanel, setCommentPanel] = useState<{ key: string; entryName: string } | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState("");
+  const [commentAuthor, setCommentAuthor] = useState("");
 
   useEffect(() => {
     fetch("/api/reactions")
@@ -197,7 +198,7 @@ export default function Home() {
     // Optimistic update
     setReactions((prev) => {
       const existing = prev[key] ?? { up: 0, down: 0, comments: 0 };
-      return { ...prev, [key]: { ...existing, [type]: existing[type] + 1 } };
+      return { ...prev, [key]: { ...existing, [type]: (Number(existing[type]) || 0) + 1 } };
     });
     try {
       const res = await fetch("/api/reactions", {
@@ -211,7 +212,7 @@ export default function Home() {
       // revert on error
       setReactions((prev) => {
         const existing = prev[key] ?? { up: 0, down: 0, comments: 0 };
-        return { ...prev, [key]: { ...existing, [type]: Math.max(0, existing[type] - 1) } };
+        return { ...prev, [key]: { ...existing, [type]: Math.max(0, (Number(existing[type]) || 0) - 1) } };
       });
     }
   };
@@ -232,18 +233,19 @@ export default function Home() {
   const handleComment = async () => {
     if (!commentPanel || !commentText.trim()) return;
     const text = commentText.trim();
+    const author = commentAuthor.trim() || "Anonymous";
     setCommentText("");
     try {
       const res = await fetch("/api/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key: commentPanel.key, text }),
+        body: JSON.stringify({ key: commentPanel.key, text, author }),
       });
       const comment = await res.json();
       setComments((prev) => [comment, ...prev]);
       setReactions((prev) => {
         const existing = prev[commentPanel.key] ?? { up: 0, down: 0, comments: 0 };
-        return { ...prev, [commentPanel.key]: { ...existing, comments: existing.comments + 1 } };
+        return { ...prev, [commentPanel.key]: { ...existing, comments: (Number(existing.comments) || 0) + 1 } };
       });
     } catch {
       setCommentText(text); // restore on error
@@ -344,6 +346,8 @@ export default function Home() {
                   <div key={i} className="bg-gray-50 rounded-lg p-3">
                     <p className="text-gray-700 text-sm">{c.text}</p>
                     <p className="text-gray-400 text-xs mt-1">
+                      <span className="font-medium text-gray-500">{c.author || "Anonymous"}</span>
+                      {" · "}
                       {new Date(c.timestamp).toLocaleDateString("en-IN", {
                         day: "numeric",
                         month: "short",
@@ -354,7 +358,16 @@ export default function Home() {
                 ))
               )}
             </div>
-            <div className="border-t border-gray-100 p-3 flex gap-2">
+            <div className="border-t border-gray-100 p-3 flex flex-col gap-2">
+              <input
+                type="text"
+                value={commentAuthor}
+                onChange={(e) => setCommentAuthor(e.target.value)}
+                placeholder="Your name (optional)"
+                className="text-sm px-3 py-1.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-400 text-gray-600"
+                maxLength={50}
+              />
+              <div className="flex gap-2">
               <input
                 type="text"
                 value={commentText}
@@ -371,6 +384,7 @@ export default function Home() {
               >
                 Post
               </button>
+              </div>
             </div>
           </div>
         </div>
