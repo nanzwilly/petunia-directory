@@ -142,12 +142,13 @@ function CategoryCard({
           const key = makeKey(category, entry.name);
           const r = reactions[key];
           return (
-            <div key={i} className="px-4 py-2.5 flex flex-col gap-0.5">
+            <div key={i} className="group px-4 py-2.5 flex flex-col gap-0.5">
               <p className="text-gray-800 text-base sm:text-sm font-medium leading-snug">{entry.name}</p>
               {entry.phone && <PhoneLink phone={entry.phone} />}
               {entry.phone2 && <PhoneLink phone={entry.phone2} />}
               {entry.note && <p className="text-sm sm:text-xs text-gray-400 italic">{entry.note}</p>}
-              <div className="flex items-center gap-3 mt-0.5">
+              {/* Mobile: visible only if counts > 0. Desktop: visible on row hover. */}
+              <div className={[(r?.up || r?.down || r?.comments) ? "flex" : "hidden", "sm:hidden sm:group-hover:flex items-center gap-3 mt-0.5"].join(" ")}>
                 <button
                   onClick={() => onReact(key, "up")}
                   className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-green-600 transition-colors"
