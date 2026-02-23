@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import directory from "@/data/directory.json";
 
 type Entry = {
@@ -14,6 +14,9 @@ type Category = {
   category: string;
   entries: Entry[];
 };
+
+type Reaction = { up: number; down: number; comments: number };
+type Comment = { text: string; timestamp: number };
 
 // Priority categories appear first
 const PRIORITY = [
@@ -33,6 +36,12 @@ const PRIORITY = [
   "Cab Service / Airport Taxi",
   "Meal Service",
 ];
+
+function makeKey(category: string, name: string): string {
+  const slug = (s: string) =>
+    s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return `${slug(category)}--${slug(name)}`;
+}
 
 function categoryIcon(category: string): string {
   const icons: Record<string, string> = {
@@ -107,7 +116,19 @@ function PhoneLink({ phone }: { phone: string }) {
   );
 }
 
-function CategoryCard({ category, entries }: { category: string; entries: Entry[] }) {
+function CategoryCard({
+  category,
+  entries,
+  reactions,
+  onReact,
+  onOpenComments,
+}: {
+  category: string;
+  entries: Entry[];
+  reactions: Record<string, Reaction>;
+  onReact: (key: string, type: "up" | "down") => void;
+  onOpenComments: (key: string, entryName: string) => void;
+}) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col sm:h-[180px]">
       {/* Card header */}
@@ -117,14 +138,41 @@ function CategoryCard({ category, entries }: { category: string; entries: Entry[
       </div>
       {/* Entries — scrollable on desktop, fully expanded on mobile */}
       <div className="divide-y divide-gray-100 sm:overflow-y-auto sm:flex-1">
-        {entries.map((entry, i) => (
-          <div key={i} className="px-4 py-2.5 flex flex-col gap-0.5">
-            <p className="text-gray-800 text-base sm:text-sm font-medium leading-snug">{entry.name}</p>
-            {entry.phone && <PhoneLink phone={entry.phone} />}
-            {entry.phone2 && <PhoneLink phone={entry.phone2} />}
-            {entry.note && <p className="text-sm sm:text-xs text-gray-400 italic">{entry.note}</p>}
-          </div>
-        ))}
+        {entries.map((entry, i) => {
+          const key = makeKey(category, entry.name);
+          const r = reactions[key];
+          return (
+            <div key={i} className="px-4 py-2.5 flex flex-col gap-0.5">
+              <p className="text-gray-800 text-base sm:text-sm font-medium leading-snug">{entry.name}</p>
+              {entry.phone && <PhoneLink phone={entry.phone} />}
+              {entry.phone2 && <PhoneLink phone={entry.phone2} />}
+              {entry.note && <p className="text-sm sm:text-xs text-gray-400 italic">{entry.note}</p>}
+              <div className="flex items-center gap-3 mt-0.5">
+                <button
+                  onClick={() => onReact(key, "up")}
+                  className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-green-600 transition-colors"
+                  title="Helpful"
+                >
+                  👍 <span>{r?.up ?? 0}</span>
+                </button>
+                <button
+                  onClick={() => onReact(key, "down")}
+                  className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-red-500 transition-colors"
+                  title="Not helpful"
+                >
+                  👎 <span>{r?.down ?? 0}</span>
+                </button>
+                <button
+                  onClick={() => onOpenComments(key, entry.name)}
+                  className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-teal-600 transition-colors"
+                  title="Comments"
+                >
+                  💬 <span>{r?.comments ?? 0}</span>
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -132,6 +180,74 @@ function CategoryCard({ category, entries }: { category: string; entries: Entry[
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const [reactions, setReactions] = useState<Record<string, Reaction>>({});
+  const [commentPanel, setCommentPanel] = useState<{ key: string; entryName: string } | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [commentText, setCommentText] = useState("");
+
+  useEffect(() => {
+    fetch("/api/reactions")
+      .then((r) => r.json())
+      .then(setReactions)
+      .catch(() => {});
+  }, []);
+
+  const handleReact = async (key: string, type: "up" | "down") => {
+    // Optimistic update
+    setReactions((prev) => {
+      const existing = prev[key] ?? { up: 0, down: 0, comments: 0 };
+      return { ...prev, [key]: { ...existing, [type]: existing[type] + 1 } };
+    });
+    try {
+      const res = await fetch("/api/reactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key, type }),
+      });
+      const data = await res.json();
+      setReactions((prev) => ({ ...prev, [key]: data }));
+    } catch {
+      // revert on error
+      setReactions((prev) => {
+        const existing = prev[key] ?? { up: 0, down: 0, comments: 0 };
+        return { ...prev, [key]: { ...existing, [type]: Math.max(0, existing[type] - 1) } };
+      });
+    }
+  };
+
+  const handleOpenComments = async (key: string, entryName: string) => {
+    setCommentPanel({ key, entryName });
+    setCommentText("");
+    setComments([]);
+    try {
+      const res = await fetch(`/api/comments?key=${encodeURIComponent(key)}`);
+      const data = await res.json();
+      setComments(Array.isArray(data) ? data : []);
+    } catch {
+      setComments([]);
+    }
+  };
+
+  const handleComment = async () => {
+    if (!commentPanel || !commentText.trim()) return;
+    const text = commentText.trim();
+    setCommentText("");
+    try {
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: commentPanel.key, text }),
+      });
+      const comment = await res.json();
+      setComments((prev) => [comment, ...prev]);
+      setReactions((prev) => {
+        const existing = prev[commentPanel.key] ?? { up: 0, down: 0, comments: 0 };
+        return { ...prev, [commentPanel.key]: { ...existing, comments: existing.comments + 1 } };
+      });
+    } catch {
+      setCommentText(text); // restore on error
+    }
+  };
 
   const sorted = useMemo(() => {
     const data = directory as Category[];
@@ -183,6 +299,9 @@ export default function Home() {
                 key={cat.category}
                 category={cat.category}
                 entries={cat.entries}
+                reactions={reactions}
+                onReact={handleReact}
+                onOpenComments={handleOpenComments}
               />
             ))}
           </div>
@@ -192,6 +311,69 @@ export default function Home() {
       <footer className="bg-gray-800 border-t border-gray-700 text-center text-xs text-gray-400 py-2">
         Petunia Directory — managed by the community
       </footer>
+
+      {/* Comments modal */}
+      {commentPanel && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          onClick={() => setCommentPanel(null)}
+        >
+          <div
+            className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[80vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="bg-gray-800 px-4 py-3 flex items-center justify-between rounded-t-xl">
+              <h3 className="text-white font-semibold text-sm truncate pr-2">
+                💬 {commentPanel.entryName}
+              </h3>
+              <button
+                onClick={() => setCommentPanel(null)}
+                className="text-gray-400 hover:text-white text-lg leading-none flex-shrink-0"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[100px]">
+              {comments.length === 0 ? (
+                <p className="text-gray-400 text-sm text-center py-4">
+                  No comments yet. Be the first!
+                </p>
+              ) : (
+                comments.map((c, i) => (
+                  <div key={i} className="bg-gray-50 rounded-lg p-3">
+                    <p className="text-gray-700 text-sm">{c.text}</p>
+                    <p className="text-gray-400 text-xs mt-1">
+                      {new Date(c.timestamp).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+            <div className="border-t border-gray-100 p-3 flex gap-2">
+              <input
+                type="text"
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleComment()}
+                placeholder="Add a comment…"
+                className="flex-1 text-sm px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-400"
+                maxLength={500}
+              />
+              <button
+                onClick={handleComment}
+                disabled={!commentText.trim()}
+                className="bg-teal-700 text-white text-sm px-4 py-2 rounded-lg hover:bg-teal-600 disabled:opacity-40"
+              >
+                Post
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
