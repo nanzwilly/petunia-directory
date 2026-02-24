@@ -129,6 +129,8 @@ function CategoryCard({
   onReact: (key: string, type: "up" | "down") => void;
   onOpenComments: (key: string, entryName: string) => void;
 }) {
+  const [expandedKey, setExpandedKey] = useState<string | null>(null);
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col sm:h-[180px]">
       {/* Card header */}
@@ -141,14 +143,29 @@ function CategoryCard({
         {entries.map((entry, i) => {
           const key = makeKey(category, entry.name);
           const r = reactions[key];
+          const hasActivity = !!(r?.up || r?.down || r?.comments);
+          const isExpanded = expandedKey === key;
+          const showReactions = hasActivity || isExpanded;
           return (
             <div key={i} className="group px-4 py-2.5 flex flex-col gap-0.5">
-              <p className="text-gray-800 text-base sm:text-sm font-medium leading-snug">{entry.name}</p>
-              {entry.phone && <PhoneLink phone={entry.phone} />}
-              {entry.phone2 && <PhoneLink phone={entry.phone2} />}
-              {entry.note && <p className="text-sm sm:text-xs text-gray-400 italic">{entry.note}</p>}
-              {/* Mobile: visible only if counts > 0. Desktop: visible on row hover. */}
-              <div className={[(r?.up || r?.down || r?.comments) ? "flex" : "hidden", "sm:hidden sm:group-hover:flex items-center gap-3 mt-0.5"].join(" ")}>
+              <div className="flex items-start gap-1">
+                <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                  <p className="text-gray-800 text-base sm:text-sm font-medium leading-snug">{entry.name}</p>
+                  {entry.phone && <PhoneLink phone={entry.phone} />}
+                  {entry.phone2 && <PhoneLink phone={entry.phone2} />}
+                  {entry.note && <p className="text-sm sm:text-xs text-gray-400 italic">{entry.note}</p>}
+                </div>
+                {/* Mobile-only tap trigger */}
+                <button
+                  className="sm:hidden mt-0.5 px-1 text-gray-300 hover:text-teal-500 transition-colors flex-shrink-0 text-base leading-snug"
+                  onClick={() => setExpandedKey(isExpanded ? null : key)}
+                  title="React"
+                >
+                  ···
+                </button>
+              </div>
+              {/* Mobile: visible when tapped or has activity. Desktop: visible on row hover. */}
+              <div className={[showReactions ? "flex" : "hidden", "sm:hidden sm:group-hover:flex items-center gap-3 mt-0.5"].join(" ")}>
                 <button
                   onClick={() => onReact(key, "up")}
                   className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-green-600 transition-colors"
