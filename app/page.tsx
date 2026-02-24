@@ -120,12 +120,14 @@ function CategoryCard({
   category,
   entries,
   reactions,
+  voted,
   onReact,
   onOpenComments,
 }: {
   category: string;
   entries: Entry[];
   reactions: Record<string, Reaction>;
+  voted: Record<string, "up" | "down">;
   onReact: (key: string, type: "up" | "down") => void;
   onOpenComments: (key: string, entryName: string) => void;
 }) {
@@ -143,6 +145,7 @@ function CategoryCard({
         {entries.map((entry, i) => {
           const key = makeKey(category, entry.name);
           const r = reactions[key];
+          const myVote = voted[key];
           const hasActivity = !!(r?.up || r?.down || r?.comments);
           const isExpanded = expandedKey === key;
           const showReactions = hasActivity || isExpanded;
@@ -168,15 +171,25 @@ function CategoryCard({
               <div className={[showReactions ? "flex" : "hidden", "sm:hidden sm:group-hover:flex items-center gap-3 mt-0.5"].join(" ")}>
                 <button
                   onClick={() => onReact(key, "up")}
-                  className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-green-600 transition-colors"
-                  title="Helpful"
+                  disabled={!!myVote}
+                  className={`flex items-center gap-0.5 text-xs transition-colors ${
+                    myVote === "up" ? "text-green-600 font-semibold" :
+                    myVote === "down" ? "text-gray-300 cursor-not-allowed" :
+                    "text-gray-400 hover:text-green-600"
+                  }`}
+                  title={myVote ? "Already voted" : "Helpful"}
                 >
                   👍 <span>{r?.up || 0}</span>
                 </button>
                 <button
                   onClick={() => onReact(key, "down")}
-                  className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-red-500 transition-colors"
-                  title="Not helpful"
+                  disabled={!!myVote}
+                  className={`flex items-center gap-0.5 text-xs transition-colors ${
+                    myVote === "down" ? "text-red-500 font-semibold" :
+                    myVote === "up" ? "text-gray-300 cursor-not-allowed" :
+                    "text-gray-400 hover:text-red-500"
+                  }`}
+                  title={myVote ? "Already voted" : "Not helpful"}
                 >
                   👎 <span>{r?.down || 0}</span>
                 </button>
@@ -199,6 +212,7 @@ function CategoryCard({
 export default function Home() {
   const [search, setSearch] = useState("");
   const [reactions, setReactions] = useState<Record<string, Reaction>>({});
+  const [voted, setVoted] = useState<Record<string, "up" | "down">>({});
   const [commentPanel, setCommentPanel] = useState<{ key: string; entryName: string } | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState("");
@@ -209,9 +223,19 @@ export default function Home() {
       .then((r) => r.json())
       .then(setReactions)
       .catch(() => {});
+    // Load previously cast votes from this browser
+    try {
+      const stored = localStorage.getItem("petunia-voted");
+      if (stored) setVoted(JSON.parse(stored));
+    } catch { /* ignore */ }
   }, []);
 
   const handleReact = async (key: string, type: "up" | "down") => {
+    if (voted[key]) return; // already voted on this entry
+    // Save vote to localStorage immediately
+    const newVoted = { ...voted, [key]: type };
+    setVoted(newVoted);
+    try { localStorage.setItem("petunia-voted", JSON.stringify(newVoted)); } catch { /* ignore */ }
     // Optimistic update
     setReactions((prev) => {
       const existing = prev[key] ?? { up: 0, down: 0, comments: 0 };
@@ -231,6 +255,10 @@ export default function Home() {
         const existing = prev[key] ?? { up: 0, down: 0, comments: 0 };
         return { ...prev, [key]: { ...existing, [type]: Math.max(0, (Number(existing[type]) || 0) - 1) } };
       });
+      const reverted = { ...voted };
+      delete reverted[key];
+      setVoted(reverted);
+      try { localStorage.setItem("petunia-voted", JSON.stringify(reverted)); } catch { /* ignore */ }
     }
   };
 
@@ -339,6 +367,7 @@ export default function Home() {
                 category={cat.category}
                 entries={cat.entries}
                 reactions={reactions}
+                voted={voted}
                 onReact={handleReact}
                 onOpenComments={handleOpenComments}
               />
