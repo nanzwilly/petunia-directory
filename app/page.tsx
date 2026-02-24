@@ -247,6 +247,25 @@ export default function Home() {
     }
   };
 
+  const handleDeleteComment = async (timestamp: number) => {
+    if (!commentPanel) return;
+    if (!window.confirm("Delete this comment?")) return;
+    try {
+      await fetch("/api/comments", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: commentPanel.key, timestamp }),
+      });
+      setComments((prev) => prev.filter((c) => c.timestamp !== timestamp));
+      setReactions((prev) => {
+        const existing = prev[commentPanel.key] ?? { up: 0, down: 0, comments: 0 };
+        return { ...prev, [commentPanel.key]: { ...existing, comments: Math.max(0, (Number(existing.comments) || 0) - 1) } };
+      });
+    } catch {
+      // silently ignore
+    }
+  };
+
   const handleComment = async () => {
     if (!commentPanel || !commentText.trim()) return;
     const text = commentText.trim();
@@ -360,17 +379,26 @@ export default function Home() {
                 </p>
               ) : (
                 comments.map((c, i) => (
-                  <div key={i} className="bg-gray-50 rounded-lg p-3">
-                    <p className="text-gray-700 text-sm">{c.text}</p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      <span className="font-medium text-gray-500">{c.author || "Anonymous"}</span>
-                      {" · "}
-                      {new Date(c.timestamp).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </p>
+                  <div key={i} className="bg-gray-50 rounded-lg p-3 flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-gray-700 text-sm">{c.text}</p>
+                      <p className="text-gray-400 text-xs mt-1">
+                        <span className="font-medium text-gray-500">{c.author || "Anonymous"}</span>
+                        {" · "}
+                        {new Date(c.timestamp).toLocaleDateString("en-IN", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => handleDeleteComment(c.timestamp)}
+                      className="text-gray-300 hover:text-red-400 transition-colors flex-shrink-0 text-sm mt-0.5"
+                      title="Delete comment"
+                    >
+                      🗑️
+                    </button>
                   </div>
                 ))
               )}

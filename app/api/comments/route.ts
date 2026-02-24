@@ -55,3 +55,40 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { key, timestamp } = (await request.json()) as { key: string; timestamp: number };
+    if (!key || !timestamp) {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+    const redis = getRedis();
+    // Fetch all comments, remove the matching one, rewrite the list
+    const raw = await redis.lrange(`comments:${key}`, 0, 99);
+    const all: Comment[] = raw
+      .map((item) => {
+        if (typeof item === "string") {
+          try { return JSON.parse(item) as Comment; } catch { return null; }
+        }
+        return item as Comment;
+      })
+      .filter((c): c is Comment => !!c && typeof c.text === "string");
+
+    const remaining = all.filter((c) => c.timestamp !== timestamp);
+    if (remaining.length === all.length) {
+      return NextResponse.json({ error: "Comment not found" }, { status: 404 });
+    }
+
+    // Rewrite the list and decrement comment counter
+    await redis.del(`comments:${key}`);
+    if (remaining.length > 0) {
+      await redis.rpush(`comments:${key}`, ...remaining);
+    }
+    await redis.hincrby(`reactions:${key}`, "comments", -1);
+
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
+}
