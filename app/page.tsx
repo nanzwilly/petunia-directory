@@ -157,7 +157,7 @@ function CategoryCard({
                 </div>
                 {/* Mobile-only tap trigger */}
                 <button
-                  className="sm:hidden mt-0.5 px-1 text-gray-300 hover:text-teal-500 transition-colors flex-shrink-0 text-base leading-snug"
+                  className="sm:hidden mt-0.5 px-1 text-teal-600 hover:text-teal-800 transition-colors flex-shrink-0 text-base leading-snug"
                   onClick={() => setExpandedKey(isExpanded ? null : key)}
                   title="React"
                 >
