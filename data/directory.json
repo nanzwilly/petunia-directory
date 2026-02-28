@@ -160,6 +160,14 @@
     ]
   },
   {
+    "category": "Gynecologists",
+    "entries": [
+      { "name": "Dr. Pratibha", "note": "Sparsh hospital" },
+      { "name": "Dr Rajnish Samal", "note": "Baptist hospital" },
+      { "name": "Dr. Anita David", "note": "Hosmat", "phone": "99017 57775" }
+    ]
+  },
+  {
     "category": "Guitar Teacher",
     "entries": [
       { "name": "Satish Guitar Teacher", "phone": "99162 30777" }
@@ -176,9 +184,10 @@
     ]
   },
   {
-    "category": "Labs",
+    "category": "Labs/Diagnostic centers",
     "entries": [
-      { "name": "Anand Diagnostic Lab", "note": "" }
+      { "name": "Anand Diagnostic Lab", "note": "" },
+      { "name": "Image diagnostic lab", "phone": "73495 59999" }
     ]
   },
   {
