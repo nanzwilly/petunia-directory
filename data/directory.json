@@ -41,6 +41,14 @@
     ]
   },
   {
+    "category": "Acupuncture",
+    "entries": [
+      { "name": "Dr. Suresh", "phone": "97402 93040" },
+      { "name": "Latha Murali", "phone": "99805 54367" },
+      { "name": "Jyotirmya", "phone": "98808 80987" }
+    ]
+  },
+  {
     "category": "Art Galleries",
     "entries": [
       { "name": "Gallery G", "note": "" }
