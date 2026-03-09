@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
 import directory from "@/data/directory.json";
 
 type Entry = {
@@ -434,32 +435,46 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Header with search */}
       <header className="bg-teal-800 text-white px-6 py-3 shadow-md flex items-center justify-between gap-4">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight leading-tight">Petunia Directory</h1>
+        {/* Logo */}
+        <div className="flex-shrink-0">
+          <Link href="/" className="text-xl font-bold tracking-tight leading-tight hover:text-teal-100 transition-colors">
+            Petunia Directory
+          </Link>
           <p className="text-teal-200 text-xs">Community services &amp; contacts</p>
         </div>
-        {focusCategory ? (
-          <div className="flex items-center gap-2 w-full max-w-sm justify-end">
-            <div className="text-xs text-teal-100 truncate">
-              Showing: <span className="font-semibold">{focusCategory}</span>
+        {/* Right: nav pills + search — all in one row */}
+        <div className="flex items-center gap-2 flex-1 justify-end">
+          <nav className="flex items-center gap-1.5 flex-shrink-0">
+            <Link href="/" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
+              🏠 Directory
+            </Link>
+            <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
+              🧹 Maids
+            </Link>
+          </nav>
+          {focusCategory ? (
+            <div className="flex items-center gap-2">
+              <div className="text-xs text-teal-100 truncate max-w-[120px]">
+                Showing: <span className="font-semibold">{focusCategory}</span>
+              </div>
+              <button
+                type="button"
+                onClick={clearFocusCategory}
+                className="text-xs px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex-shrink-0"
+              >
+                Clear
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={clearFocusCategory}
-              className="text-xs px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20"
-            >
-              Clear
-            </button>
-          </div>
-        ) : (
-        <input
-          type="search"
-          placeholder="Search categories, names or numbers…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-sm text-sm px-4 py-2 rounded-lg bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
-        />
-        )}
+          ) : (
+            <input
+              type="search"
+              placeholder="Search…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full max-w-xs text-sm px-4 py-1.5 rounded-full bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            />
+          )}
+        </div>
       </header>
 
       {/* Cards grid */}
