@@ -14,8 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://petunia-directory.vercel.app"),
   title: "Petunia Directory",
   description: "Community services and contacts directory",
+  openGraph: {
+    title: "Petunia Directory",
+    description: "Community services and contacts directory",
+    type: "website",
+    images: [{ url: "/opengraph-image.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Petunia Directory",
+    description: "Community services and contacts directory",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function RootLayout({
