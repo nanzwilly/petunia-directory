@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import directory from "@/data/directory.json";
 
 type Entry = {
@@ -36,6 +36,39 @@ const PRIORITY = [
   "Cab Service / Airport Taxi",
   "Meal Service",
 ];
+
+function slugify(s: string) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function categoryAnchorId(category: string) {
+  return `cat-${slugify(category)}`;
+}
+
+async function shareCategory(category: string) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("category", category);
+  const shareUrl = url.toString();
+
+  const title = `Petunia Directory — ${category}`;
+  const text = `Petunia Directory: ${category}`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({ title, text, url: shareUrl });
+      return;
+    }
+  } catch {
+    // fall through to copy
+  }
+
+  try {
+    await navigator.clipboard?.writeText(shareUrl);
+    window.alert("Link copied. You can paste it on WhatsApp.");
+  } catch {
+    window.prompt("Copy this link:", shareUrl);
+  }
+}
 
 function categoryIcon(category: string): string {
   const icons: Record<string, string> = {
@@ -113,13 +146,41 @@ function PhoneLink({ phone }: { phone: string }) {
   );
 }
 
-function CategoryCard({ category, entries }: { category: string; entries: Entry[] }) {
+function CategoryCard({
+  category,
+  entries,
+  anchorId,
+  highlight,
+}: {
+  category: string;
+  entries: Entry[];
+  anchorId: string;
+  highlight: boolean;
+}) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col" style={{ height: "180px" }}>
+    <div
+      id={anchorId}
+      className={[
+        "bg-white rounded-xl border shadow-sm overflow-hidden flex flex-col scroll-mt-24",
+        highlight ? "border-teal-500 ring-2 ring-teal-200" : "border-gray-200",
+      ].join(" ")}
+      style={{ height: "180px" }}
+    >
       {/* Card header */}
       <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 flex-shrink-0">
         <span className="text-xl">{categoryIcon(category)}</span>
-        <h2 className="text-white font-semibold text-sm">{category}</h2>
+        <h2 className="text-white font-semibold text-sm flex-1 min-w-0 truncate">{category}</h2>
+        <button
+          type="button"
+          onClick={() => shareCategory(category)}
+          className="text-gray-300 hover:text-white transition-colors flex-shrink-0"
+          title="Share category"
+          aria-label={`Share ${category}`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.5 2.5 0 000-1.39l7.05-4.11A2.99 2.99 0 0018 7.91a3 3 0 10-2.83-4H15a3 3 0 00.04.49L7.99 8.51A3 3 0 006 7.91a3 3 0 100 6c.73 0 1.4-.26 1.93-.69l7.14 4.18c-.03.16-.07.33-.07.5a3 3 0 103-3z"/>
+          </svg>
+        </button>
       </div>
       {/* Entries — scrollable */}
       <div className="divide-y divide-gray-100 overflow-y-auto flex-1">
@@ -138,6 +199,7 @@ function CategoryCard({ category, entries }: { category: string; entries: Entry[
 
 export default function TestPage() {
   const [search, setSearch] = useState("");
+  const [focusCategory, setFocusCategory] = useState<string | null>(null);
 
   const sorted = useMemo(() => {
     const data = directory as Category[];
@@ -147,6 +209,7 @@ export default function TestPage() {
   }, []);
 
   const filtered = useMemo(() => {
+    if (focusCategory) return sorted.filter((c) => c.category === focusCategory);
     if (!search.trim()) return sorted;
     const q = search.toLowerCase();
     return sorted.filter(
@@ -159,7 +222,36 @@ export default function TestPage() {
             e.phone2?.includes(q)
         )
     );
-  }, [search, sorted]);
+  }, [focusCategory, search, sorted]);
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get("category");
+      if (!raw) return;
+      const data = directory as Category[];
+      const match = data.find((c) => c.category.toLowerCase() === raw.toLowerCase());
+      if (!match) return;
+      setFocusCategory(match.category);
+      setSearch("");
+      requestAnimationFrame(() => {
+        document.getElementById(categoryAnchorId(match.category))?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const clearFocusCategory = () => {
+    setFocusCategory(null);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("category");
+      window.history.replaceState({}, "", url.toString());
+    } catch {
+      // ignore
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
@@ -169,6 +261,20 @@ export default function TestPage() {
           <h1 className="text-xl font-bold tracking-tight leading-tight">Petunia Directory</h1>
           <p className="text-teal-200 text-xs">Community services &amp; contacts</p>
         </div>
+        {focusCategory ? (
+          <div className="flex items-center gap-2 w-full max-w-sm justify-end">
+            <div className="text-xs text-teal-100 truncate">
+              Showing: <span className="font-semibold">{focusCategory}</span>
+            </div>
+            <button
+              type="button"
+              onClick={clearFocusCategory}
+              className="text-xs px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20"
+            >
+              Clear
+            </button>
+          </div>
+        ) : (
         <input
           type="search"
           placeholder="Search categories, names or numbers…"
@@ -176,6 +282,7 @@ export default function TestPage() {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full max-w-sm text-sm px-4 py-2 rounded-lg bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
         />
+        )}
       </header>
 
       {/* Cards grid */}
@@ -189,6 +296,8 @@ export default function TestPage() {
                 key={cat.category}
                 category={cat.category}
                 entries={cat.entries}
+                anchorId={categoryAnchorId(cat.category)}
+                highlight={cat.category === focusCategory}
               />
             ))}
           </div>
