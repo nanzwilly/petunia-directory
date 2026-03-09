@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: "Petunia Directory",
   description: "Community services and contacts directory",
   icons: {
+    shortcut: ["/favicon.ico"],
     icon: [{ url: "/icon.png", type: "image/png" }],
     apple: [{ url: "/icon.png", type: "image/png" }],
   },
