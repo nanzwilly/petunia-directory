@@ -18,9 +18,8 @@ export const metadata: Metadata = {
   title: "Petunia Directory",
   description: "Community services and contacts directory",
   icons: {
-    // Cache-bust to force browsers to refresh the favicon
-    icon: [{ url: "/icon.png?v=2", type: "image/png" }],
-    apple: [{ url: "/icon.png?v=2", type: "image/png" }],
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/icon.png", type: "image/png" }],
   },
   openGraph: {
     title: "Petunia Directory",
