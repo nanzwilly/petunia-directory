@@ -443,37 +443,39 @@ export default function Home() {
             </Link>
             <p className="text-teal-200 text-xs">Community services &amp; contacts</p>
           </div>
-          {/* Nav pills — desktop only in this row */}
-          <nav className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
-            <Link href="/" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
-              🏠 Directory
-            </Link>
-            <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
-              <span className="text-base">🧹</span> Maids
-            </Link>
-          </nav>
-          {focusCategory ? (
-            <div className="flex items-center gap-2 flex-1 justify-end">
-              <div className="text-xs text-teal-100 truncate max-w-[140px]">
-                Showing: <span className="font-semibold">{focusCategory}</span>
+          {/* Nav pills + search — flex-1 so they fill remaining space; justify-end on desktop pushes right */}
+          <div className="flex-1 flex items-center gap-2 sm:justify-end">
+            <nav className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
+              <Link href="/" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
+                🏠 Directory
+              </Link>
+              <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
+                <span className="text-base">🧹</span> Maids
+              </Link>
+            </nav>
+            {focusCategory ? (
+              <div className="flex items-center gap-2 flex-1 sm:flex-none justify-end">
+                <div className="text-xs text-teal-100 truncate max-w-[140px]">
+                  Showing: <span className="font-semibold">{focusCategory}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={clearFocusCategory}
+                  className="text-xs px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex-shrink-0"
+                >
+                  Clear
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={clearFocusCategory}
-                className="text-xs px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex-shrink-0"
-              >
-                Clear
-              </button>
-            </div>
-          ) : (
-            <input
-              type="search"
-              placeholder="Search…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 text-sm px-4 py-1.5 rounded-full bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
-            />
-          )}
+            ) : (
+              <input
+                type="search"
+                placeholder="Search…"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="flex-1 sm:flex-none sm:w-56 text-sm px-4 py-1.5 rounded-full bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+              />
+            )}
+          </div>
         </div>
         {/* Row 2: Nav pills — mobile only */}
         <nav className="sm:hidden flex items-center gap-1.5">
