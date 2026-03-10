@@ -434,27 +434,27 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Header with search */}
-      <header className="bg-teal-800 text-white px-4 py-3 shadow-md flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-        {/* Logo */}
-        <div className="flex-shrink-0">
-          <Link href="/" className="text-xl font-bold tracking-tight leading-tight hover:text-teal-100 transition-colors">
-            Petunia Directory
-          </Link>
-          <p className="text-teal-200 text-xs">Community services &amp; contacts</p>
-        </div>
-        {/* Nav pills + search — row on both mobile and desktop */}
-        <div className="flex items-center gap-2 sm:flex-1 sm:justify-end">
-          <nav className="flex items-center gap-1.5 flex-shrink-0">
+      <header className="bg-teal-800 text-white px-4 py-3 shadow-md flex flex-col gap-2">
+        {/* Row 1: Logo + (nav pills on desktop) + Search */}
+        <div className="flex items-center gap-3">
+          <div className="flex-shrink-0">
+            <Link href="/" className="text-xl font-bold tracking-tight leading-tight hover:text-teal-100 transition-colors">
+              Petunia Directory
+            </Link>
+            <p className="text-teal-200 text-xs">Community services &amp; contacts</p>
+          </div>
+          {/* Nav pills — desktop only in this row */}
+          <nav className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
             <Link href="/" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
               🏠 Directory
             </Link>
             <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
-              🧹 Maids
+              <span className="text-base">🧹</span> Maids
             </Link>
           </nav>
           {focusCategory ? (
             <div className="flex items-center gap-2 flex-1 justify-end">
-              <div className="text-xs text-teal-100 truncate max-w-[120px]">
+              <div className="text-xs text-teal-100 truncate max-w-[140px]">
                 Showing: <span className="font-semibold">{focusCategory}</span>
               </div>
               <button
@@ -471,10 +471,19 @@ export default function Home() {
               placeholder="Search…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 sm:max-w-xs text-sm px-4 py-1.5 rounded-full bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+              className="flex-1 text-sm px-4 py-1.5 rounded-full bg-white border border-teal-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
             />
           )}
         </div>
+        {/* Row 2: Nav pills — mobile only */}
+        <nav className="sm:hidden flex items-center gap-1.5">
+          <Link href="/" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
+            🏠 Directory
+          </Link>
+          <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
+            <span className="text-base">🧹</span> Maids
+          </Link>
+        </nav>
       </header>
 
       {/* Cards grid */}

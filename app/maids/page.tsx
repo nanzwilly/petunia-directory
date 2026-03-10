@@ -122,31 +122,42 @@ export default function MaidsPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-teal-800 text-white px-4 py-3 shadow-md flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-        {/* Logo */}
-        <div className="flex-shrink-0">
-          <Link href="/" className="text-xl font-bold tracking-tight leading-tight hover:text-teal-100 transition-colors">
-            Petunia Directory
-          </Link>
-          <p className="text-teal-200 text-xs">Listings auto-expire after 30 days</p>
-        </div>
-        {/* Nav pills + add button — row on both mobile and desktop */}
-        <div className="flex items-center gap-2 sm:flex-1 sm:justify-end">
-          <nav className="flex items-center gap-1.5 flex-shrink-0">
+      <header className="bg-teal-800 text-white px-4 py-3 shadow-md flex flex-col gap-2">
+        {/* Row 1: Logo + (nav pills on desktop) + Add button */}
+        <div className="flex items-center gap-3">
+          <div className="flex-shrink-0">
+            <Link href="/" className="text-xl font-bold tracking-tight leading-tight hover:text-teal-100 transition-colors">
+              Petunia Directory
+            </Link>
+            <p className="text-teal-200 text-xs">Listings auto-expire after 30 days</p>
+          </div>
+          {/* Nav pills — desktop only in this row */}
+          <nav className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
             <Link href="/" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
               🏠 Directory
             </Link>
             <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
-              🧹 Maids
+              <span className="text-base">🧹</span> Maids
             </Link>
           </nav>
-          <button
-            onClick={() => { setShowForm(true); resetForm(); }}
-            className="bg-white text-teal-800 text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-teal-50 transition-colors flex-shrink-0"
-          >
-            + Add Listing
-          </button>
+          <div className="flex-1 flex justify-end">
+            <button
+              onClick={() => { setShowForm(true); resetForm(); }}
+              className="bg-white text-teal-800 text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-teal-50 transition-colors"
+            >
+              + Add Listing
+            </button>
+          </div>
         </div>
+        {/* Row 2: Nav pills — mobile only */}
+        <nav className="sm:hidden flex items-center gap-1.5">
+          <Link href="/" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
+            🏠 Directory
+          </Link>
+          <Link href="/maids" className="px-3 py-1.5 rounded-full bg-white/25 text-white text-sm font-medium hover:bg-white/35 transition-colors">
+            <span className="text-base">🧹</span> Maids
+          </Link>
+        </nav>
       </header>
 
       {/* Content */}
