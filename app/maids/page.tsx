@@ -122,7 +122,7 @@ export default function MaidsPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-teal-800 text-white px-6 py-3 shadow-md flex items-center justify-between gap-4">
+      <header className="bg-teal-800 text-white px-4 py-3 shadow-md flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/" className="text-xl font-bold tracking-tight leading-tight hover:text-teal-100 transition-colors">
@@ -130,9 +130,9 @@ export default function MaidsPage() {
           </Link>
           <p className="text-teal-200 text-xs">Listings auto-expire after 30 days</p>
         </div>
-        {/* Right: nav pills + add button — all in one row */}
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <nav className="flex items-center gap-1.5">
+        {/* Nav pills + add button — row on both mobile and desktop */}
+        <div className="flex items-center gap-2 sm:flex-1 sm:justify-end">
+          <nav className="flex items-center gap-1.5 flex-shrink-0">
             <Link href="/" className="px-3 py-1.5 rounded-full bg-white/10 text-teal-100 text-sm font-medium hover:bg-white/25 hover:text-white transition-colors">
               🏠 Directory
             </Link>
