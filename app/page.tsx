@@ -74,7 +74,7 @@ function categoryIcon(category: string): string {
     "Doctors": "🩺",
     "Driving School": "🚗",
     "Ekhata": "📝",
-    "Eye Specialists": "👁️",
+    "Ophthalmologists/Eye specialists": "👁️",
     "Frames": "🖼️",
     "Gynecologists": "🤰",
     "Guitar Teacher": "🎸",
