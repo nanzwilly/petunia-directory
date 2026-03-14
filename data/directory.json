@@ -72,14 +72,14 @@
   {
     "category": "Cab Service / Airport Taxi",
     "entries": [
+      { "name": "Smart Line Car Rental & Airport Drop", "phone": "81239 59738" },
+      { "name": "Savaari app", "phone": "90454 50000" },
       { "name": "Mishra Cab Driver", "phone": "90358 01122" },
       { "name": "Namma Yatri", "note": "App-based" },
       { "name": "Rapido", "note": "App-based" },
       { "name": "Uber", "note": "App-based" },
       { "name": "Ola", "note": "App-based" },
-      { "name": "BLR Pulse", "note": "App-based" },
-      { "name": "Smart Line Car Rental & Airport Drop", "phone": "81239 59738" },
-      { "name": "Savaari app", "phone": "90454 50000" }
+      { "name": "BLR Pulse", "note": "App-based" }
     ]
   },
   {
