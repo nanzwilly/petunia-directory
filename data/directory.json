@@ -152,6 +152,7 @@
   {
     "category": "Driving School",
     "entries": [
+      { "name": "Manjunatha Driving School", "phone": "+91 97433 76793" },
       { "name": "Sri Banjara", "phone": "99004 30889" },
       { "name": "Focus Banjara", "phone": "95353 33123" }
     ]
@@ -169,6 +170,12 @@
     "category": "Frames",
     "entries": [
       { "name": "Art Frame Nagavara", "phone": "88844 74342" }
+    ]
+  },
+  {
+    "category": "Gail Gas",
+    "entries": [
+      { "name": "Darshan", "phone": "+91 95917 95213" }
     ]
   },
   {
@@ -239,6 +246,7 @@
   {
     "category": "Notary",
     "entries": [
+      { "name": "Kanikaraj Notary", "phone": "+91 98865 45376" },
       { "name": "Mir Zia Ulla – HBR BDA", "phone": "+91 98440 68746" }
     ]
   },
@@ -275,6 +283,12 @@
     "entries": [
       { "name": "Rentokil PCI", "phone": "1800 212 2125" },
       { "name": "Godrej pest control", "phone": "80730 00766" }
+    ]
+  },
+  {
+    "category": "Pet Sitter",
+    "entries": [
+      { "name": "Monalisa", "phone": "+91 97621 02844" }
     ]
   },
   {
